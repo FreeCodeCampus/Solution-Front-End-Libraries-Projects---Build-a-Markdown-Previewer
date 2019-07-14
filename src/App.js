@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import marked from "marked";
+
+const Editor = () => {
+  const [input, setInput] = React.useState("");
+
+  const convetToMarkdown = () => {
+    return { __html: marked(input) };
+  };
+
+  return (
+    <div>
+      <textarea id="editor" onChange={e => setInput(e.target.value)} />
+      <div id="preview" dangerouslySetInnerHTML={convetToMarkdown()} />
+    </div>
+  );
+};
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Editor />
     </div>
   );
 }
